@@ -63,14 +63,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
 import resizeIframeHeight from '@/utils/resize'
-
+import { ElMessage, ElMessageBox } from 'element-plus'
+import SaveIcon from '@/assets/icons/save-line.svg'
+import TelegramIcon from '@/assets/icons/telegram.svg'
 import type { BotInfo, Setting } from '@/types'
 import { getBotInfo } from '@/api/bot'
 import { getSetting, updateSetting } from '@/api/setting'
-import SaveIcon from '@/assets/icons/save-line.svg'
-import TelegramIcon from '@/assets/icons/telegram.svg'
 
 const saved = ref(false)
 const loading = ref(false)

@@ -12,7 +12,8 @@
                 @click="contactBot"
                 style="float: right"
               >
-                <i class="iconfont icon-telegram"> 联系机器人</i>
+                <TelegramIcon class="icon" />
+                联系机器人
               </el-button>
             </el-badge>
           </div>
@@ -49,9 +50,11 @@
           <el-switch v-model="formData.disable_link_preview" />
         </el-form-item>
       </el-form>
+
       <el-form-item>
-        <el-button type="primary" @click="confirmSubmit" :loading="loading" style="margin: 0 auto">
-          <i class="iconfont icon-save-line"> 保存设置</i>
+        <el-button type="primary" @click="confirmSubmit" :disabled="loading" style="margin: 0 auto">
+          <SaveIcon class="icon" />
+          保存设置
         </el-button>
       </el-form-item>
     </el-card>
@@ -66,6 +69,8 @@ import resizeIframeHeight from '@/utils/resize'
 import type { BotInfo, Setting } from '@/types'
 import { getBotInfo } from '@/api/bot'
 import { getSetting, updateSetting } from '@/api/setting'
+import SaveIcon from '@/assets/icons/save-line.svg'
+import TelegramIcon from '@/assets/icons/telegram.svg'
 
 const saved = ref(false)
 const loading = ref(false)
@@ -186,5 +191,13 @@ onMounted(() => {
 .card-header {
   font-size: 18px;
   font-weight: bold;
+}
+
+.icon {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  color: white;
 }
 </style>

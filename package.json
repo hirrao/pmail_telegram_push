@@ -44,6 +44,7 @@
     "unplugin-vue-components": "^29.1.0",
     "vite": "npm:rolldown-vite@latest",
     "vite-plugin-vue-devtools": "^8.0.2",
+    "vite-svg-loader": "^5.1.0",
     "vue-tsc": "^3.1.0"
   }
 }

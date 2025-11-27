@@ -2,6 +2,7 @@ package hook
 
 import (
 	"regexp"
+	"strings"
 
 	"github.com/microcosm-cc/bluemonday"
 )
@@ -53,8 +54,22 @@ func removeHTMLTag(content string) string {
 
 // removeExtraSpace 移除多余空格
 // 删除标签时会替换为空格，多个连续空格影响显示效果
-// 多个空格替换为一个空格
 func removeExtraSpace(content string) string {
-	// 仅替换连续空格，保留换行符
-	return regexp.MustCompile(`\x20+`).ReplaceAllString(content, " ")
+	// 规范换行符
+	content = strings.ReplaceAll(content, "\r\n", "\n")
+	content = strings.ReplaceAll(content, "\r", "\n")
+
+	// 去除换行两侧的空格/制表符
+	// 左侧空白 + 换行
+	content = regexp.MustCompile(`[\t\x20]*\n`).ReplaceAllString(content, "\n")
+	// 换行 + 右侧空白
+	content = regexp.MustCompile(`\n[\t\x20]*`).ReplaceAllString(content, "\n")
+
+	// 多个连续换行替换为一个换行
+	content = regexp.MustCompile(`\n{2,}`).ReplaceAllString(content, "\n")
+
+	// 多个连续空格/制表符替换为一个空格（不影响换行）
+	content = regexp.MustCompile(`[\t\x20]{2,}`).ReplaceAllString(content, " ")
+
+	return content
 }
